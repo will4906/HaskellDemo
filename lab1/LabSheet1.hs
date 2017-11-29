@@ -34,5 +34,14 @@ capitalised'::String->String
 capitalised' [] = ""
 capitalised' (x:xs) = toUpper x:[toLower c|c<-xs]
 
+titleNext :: [String] -> [String]
+titleNext (x:xs) 
+    | length x > 4 = capitalised x : titleN
+    | otherwise = [toLower s| s <- x] : titleN
+    where titleN = titleNext xs
+titleNext []     = []
+
 title :: [String] -> [String]
-title (str:strlist) = capitalised str : [if length str >= 4 then capitalised str else [toLower s| s <- str] | str <- strlist]
+title (x:xs) = capitalised x : xs
+
+
